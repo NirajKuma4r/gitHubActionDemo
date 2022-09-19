@@ -30,4 +30,8 @@ jobs:
         login-server: registryforpog.azurecr.io
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
-        dockerfile: Dockerfile
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: Dockerfile
