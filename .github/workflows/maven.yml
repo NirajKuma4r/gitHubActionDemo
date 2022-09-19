@@ -30,7 +30,4 @@ jobs:
         login-server: registryforpog.azurecr.io
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
-    - name: Build & Push
-      run: |
-        docker build ./springboot-images-new -t registryforpog.azurecr.io/springboot-images-new:${{ github.run_id }}
-        docker push registryforpog.azurecr.io/springboot-images-new:${{ github.run_id }}
+        dockerfile: Dockerfile
