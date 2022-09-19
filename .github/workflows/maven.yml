@@ -24,13 +24,3 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
-    - name: Build and push docker image
-    - uses: azure/docker-login@v1
-      with:
-         login-server: registryforpog.azurecr.io
-         username: ${{ secrets.ACR_USERNAME }}
-         password: ${{ secrets.ACR_PASSWORD }}
-    - name: Build & Push
-      run: |
-      docker build ./springboot-images-new -t registryforpog.azurecr.io/springboot-images-new:${{ github.run_id }}
-      docker push registryforpog.azurecr.io/springboot-images-new:${{ github.run_id }}  
