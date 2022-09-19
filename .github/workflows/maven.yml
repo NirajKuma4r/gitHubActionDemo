@@ -33,8 +33,4 @@ jobs:
     - name: Build & Push
       run: |
        docker build ./springboot-images-new -t registryforpog.azurecr.io/springboot-images-new:${{ github.run_id }}
-       docker push registryforpog.azurecr.io/springboot-images-new:${{ github.run_id }} 
-
-
-      
-            
+       docker push registryforpog.azurecr.io/springboot-images-new:${{ github.run_id }}  
