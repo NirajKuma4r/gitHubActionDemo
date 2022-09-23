@@ -35,8 +35,8 @@ jobs:
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
     - run: |
-        docker build . -t ${{ secrets.ACR_ENDPOINT }}/gitHubDemo:${{ github.sha }}
-        docker push ${{ secrets.ACR_ENDPOINT }}/gitHubDemo:${{ github.sha }}       
+        docker build . -t ${{ secrets.ACR_ENDPOINT }}/githubdemo:${{ github.sha }}
+        docker push ${{ secrets.ACR_ENDPOINT }}/githubdemo:${{ github.sha }}       
            
     #- name: Build and push docker image
       #uses: mr-smithers-excellent/docker-build-push@v5
