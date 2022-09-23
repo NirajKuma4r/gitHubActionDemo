@@ -43,7 +43,13 @@ jobs:
       with:
         login-server: ${{ secrets.ACR_ENDPOINT }}
         username: ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}       
+        password: ${{ secrets.ACR_PASSWORD }}
+    # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
+    - name: Get K8s context
+    uses: azure/aks-set-context@v2.0
+    with:
+    resource-group: ${{ env.RESOURCE_GROUP }}
+    cluster-name: ${{ env.CLUSTER_NAME }}
     
         
         
