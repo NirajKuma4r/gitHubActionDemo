@@ -36,20 +36,20 @@ jobs:
         password: ${{ secrets.ACR_PASSWORD }}
     - run: |
         docker build . -t ${{ secrets.ACR_ENDPOINT }}/githubdemo:${{ github.sha }}
-        docker push ${{ secrets.ACR_ENDPOINT }}/githubdemo:${{ github.sha }}       
-           
-    #- name: Build and push docker image
-      #uses: mr-smithers-excellent/docker-build-push@v5
-     # with:
-      #  image: checkout/pog-api-stub/springboot-images
-       # tags: latest
-        #registry: registryforpog.azurecr.io
-        #dockerfile: Dockerfile
-        #username:   ${{ secrets.ACR_USERNAME }}
-        #password: ${{ secrets.ACR_PASSWORD }}
-        # Builds and pushes an image up to your Azure Container Registry
-        # Logs in with your Azure credentials
-         
+        docker push ${{ secrets.ACR_ENDPOINT }}/githubdemo:${{ github.sha }}
+    createSecret:
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+    # Logs in with your Azure credentials
+    - name: Azure login
+      uses: azure/login@v1.4.3
+      with:
+        login-server: ${{ secrets.ACR_ENDPOINT }}
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}       
     
         
         
