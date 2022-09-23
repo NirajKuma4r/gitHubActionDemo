@@ -39,8 +39,7 @@ jobs:
         #password: ${{ secrets.ACR_PASSWORD }}
         # Builds and pushes an image up to your Azure Container Registry
         # Logs in with your Azure credentials
-    - name: Build and push docker image
-      uses: azure/docker-login@v1
+    - uses: azure/docker-login@v1
        with:
        login-server: ${{ secrets.ACR_ENDPOINT }}
        username: ${{ secrets.ACR_USERNAME }}
