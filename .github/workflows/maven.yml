@@ -6,12 +6,12 @@ name: gitHubAction
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-  env:
+  workflow_dispatch:
+
+env:
   RESOURCE_GROUP: "dot-dev-eun-aks-shared-rg"
   CLUSTER_NAME: "dotshsrv"
-  CONTAINER_NAME: "springboot-images-new.jar"	
+  CONTAINER_NAME: "springboot-images-new.jar"
 
 jobs:
   build:
