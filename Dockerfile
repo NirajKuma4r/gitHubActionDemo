@@ -1,4 +1,4 @@
 From openjdk:8
 EXPOSE 8080
-ADD target/springboot-images-new.jar springboot-images-new.jar
-ENTRYPOINT ["java","-jar","/springboot-images-new.jar"]
+ADD target/springboot-AKS.jar springboot-AKS.jar
+ENTRYPOINT ["java","-jar","/springboot-AKS.jar"]

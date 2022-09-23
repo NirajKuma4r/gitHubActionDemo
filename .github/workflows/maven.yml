@@ -11,7 +11,7 @@ on:
 env:
   RESOURCE_GROUP: "dot-dev-eun-aks-shared-rg"
   CLUSTER_NAME: "dotshsrv"
-  CONTAINER_NAME: "springboot-images-new.jar"
+  CONTAINER_NAME: "springboot_Test"
 
 jobs:
   build:
@@ -28,12 +28,26 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
+    #- name: Build and push docker image
+      #uses: mr-smithers-excellent/docker-build-push@v5
+     # with:
+      #  image: checkout/pog-api-stub/springboot-images
+       # tags: latest
+        #registry: registryforpog.azurecr.io
+        #dockerfile: Dockerfile
+        #username:   ${{ secrets.ACR_USERNAME }}
+        #password: ${{ secrets.ACR_PASSWORD }}
+        # Builds and pushes an image up to your Azure Container Registry
+        # Logs in with your Azure credentials
     - name: Build and push docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: checkout/pog-api-stub/springboot-images
-        tags: latest
-        registry: registryforpog.azurecr.io
-        dockerfile: Dockerfile
-        username:   ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}
+      uses: azure/docker-login@v1
+       with:
+       login-server: ${{ secrets.ACR_ENDPOINT }}
+       username: ${{ secrets.ACR_USERNAME }}
+       password: ${{ secrets.ACR_PASSWORD }}
+    - run: |
+        docker build . -t ${{ secrets.ACR_ENDPOINT }}/checkout/pog-api-stub:${{ github.sha }}
+        docker push ${{ secrets.ACR_ENDPOINT }}/checkout/pog-api-stub:${{ github.sha }}         
+    
+        
+        
