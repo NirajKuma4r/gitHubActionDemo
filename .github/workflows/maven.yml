@@ -28,6 +28,15 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
+    - uses: azure/docker-login@v1
+        with:
+           login-server: ${{ secrets.ACR_ENDPOINT }}
+           username: ${{ secrets.ACR_USERNAME }}
+           password: ${{ secrets.ACR_PASSWORD }}
+    - run: |
+        docker build . -t ${{ secrets.ACR_ENDPOINT }}/gitHubDemo:${{ github.sha }}
+        docker push ${{ secrets.ACR_ENDPOINT }}/gitHubDemo:${{ github.sha }}       
+           
     #- name: Build and push docker image
       #uses: mr-smithers-excellent/docker-build-push@v5
      # with:
@@ -39,14 +48,7 @@ jobs:
         #password: ${{ secrets.ACR_PASSWORD }}
         # Builds and pushes an image up to your Azure Container Registry
         # Logs in with your Azure credentials
-    - uses: azure/docker-login@v1
-       with:
-       login-server: ${{ secrets.ACR_ENDPOINT }}
-       username: ${{ secrets.ACR_USERNAME }}
-       password: ${{ secrets.ACR_PASSWORD }}
-    - run: |
-        docker build . -t ${{ secrets.ACR_ENDPOINT }}/checkout/pog-api-stub:${{ github.sha }}
-        docker push ${{ secrets.ACR_ENDPOINT }}/checkout/pog-api-stub:${{ github.sha }}         
+         
     
         
         
