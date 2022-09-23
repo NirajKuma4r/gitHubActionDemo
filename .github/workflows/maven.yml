@@ -37,12 +37,6 @@ jobs:
     - run: |
         docker build . -t ${{ secrets.ACR_ENDPOINT }}/githubdemo:${{ github.sha }}
         docker push ${{ secrets.ACR_ENDPOINT }}/githubdemo:${{ github.sha }}
-    createSecret:
-    permissions:
-      contents: read
-      id-token: write
-    runs-on: ubuntu-latest
-    steps:
     # Logs in with your Azure credentials
     - name: Azure login
       uses: azure/login@v1.4.3
